@@ -26,8 +26,13 @@ export class DynamicTable extends LitElement {
   static properties = {
     name: 'Hello',
     title: 'Hello',
-    tableData: 'Json Data'
+    tableData: '[]'
   }
+  constructor() {
+    super();
+    this.tableData = '[]';
+  }
+
 
   render() {
     const data = JSON.parse(this.tableData);
