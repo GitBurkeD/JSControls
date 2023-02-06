@@ -10,7 +10,7 @@ export class DynamicTable extends LitElement {
       iconUrl: 'one-line-text',
       groupName: 'groups',
       properties: {
-        tableData: {
+        data: {
           type: 'string',
           title: 'Table Data',
           description: 'Data in JSON format'
@@ -26,17 +26,16 @@ export class DynamicTable extends LitElement {
   static properties = {
     name: 'Hello',
     title: 'Hello',
-    tableData: '[]'
+    data: '[]'
   }
   constructor() {
     super();
-    this.tableData = '[]';
+    this.data = '[]';
   }
 
-
   render() {
-    const tableData = JSON.parse(this.tableData);
-    const headers = Object.keys(tableData[0]);
+    const data = JSON.parse(this.data);
+    const headers = Object.keys(data[0]);
 
     return html`
       <table>
@@ -47,7 +46,7 @@ export class DynamicTable extends LitElement {
           </tr>
         </thead>
         <tbody>
-          ${tableData.map(
+          ${data.map(
             row => html`
               <tr>
                 ${headers.map(header => html`<td>${row[header]}</td>`)}
