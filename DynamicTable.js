@@ -10,13 +10,20 @@ export class DynamicTable extends LitElement {
       controlName: 'Dynamic Table',
       fallbackDisableSubmit: false,
       version: '1.0',
+      iconUrl: 'one-line-text',
+      groupName: 'groups',
       properties: {
         data: {
           type: 'string',
           title: 'Data',
           description: 'Data in JSON format',
-        },
+        }
       },
+      standardProperties: {
+        readOnly: true,
+        required: false,
+        description: true,
+    }
     };
   }
 
