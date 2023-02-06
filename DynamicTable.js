@@ -7,7 +7,7 @@ export class DynamicTable extends LitElement {
 
   static getMetaConfig() {
     return {
-      controlName: 'Dynamic Table',
+      controlName: 'DynamicTable',
       fallbackDisableSubmit: false,
       version: '1.0',
       properties: {
