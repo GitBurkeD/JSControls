@@ -35,8 +35,8 @@ export class DynamicTable extends LitElement {
 
 
   render() {
-    const data = JSON.parse(this.tableData);
-    const headers = Object.keys(data[0]);
+    const tableData = JSON.parse(this.tableData);
+    const headers = Object.keys(tableData[0]);
 
     return html`
       <table>
@@ -47,7 +47,7 @@ export class DynamicTable extends LitElement {
           </tr>
         </thead>
         <tbody>
-          ${data.map(
+          ${tableData.map(
             row => html`
               <tr>
                 ${headers.map(header => html`<td>${row[header]}</td>`)}
