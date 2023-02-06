@@ -2,7 +2,7 @@ import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit
 
 export class DynamicTable extends LitElement {
   static properties = {
-    data: { type: String },
+    data: '',
   };
 
   static getMetaConfig() {
@@ -23,19 +23,14 @@ export class DynamicTable extends LitElement {
         readOnly: true,
         required: false,
         description: true,
-    }
+      }
     };
   }
-  static properties = {
-    name: 'Hello',
-    title: 'Hello',
-    data: 'Json Data'
-  }
+
   constructor() {
     super();
     this.data = '[]';
   }
-
 
   render() {
     const data = JSON.parse(this.data);
