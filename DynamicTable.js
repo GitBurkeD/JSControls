@@ -26,16 +26,16 @@ export class DynamicTable extends LitElement {
     }
     };
   }
-
+  static properties = {
+    name: 'Hello',
+    title: 'Hello',
+    data: 'Json Data'
+  }
   constructor() {
     super();
     this.data = '[]';
   }
-  static properties = {
-    name: 'Hello',
-    title: 'Hello',
-    data: ''
-}
+
 
   render() {
     const data = JSON.parse(this.data);
