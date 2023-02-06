@@ -1,9 +1,6 @@
 import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
 
 export class DynamicTable extends LitElement {
-  static properties = {
-    tableData: '',
-  };
 
   static getMetaConfig() {
     return {
@@ -26,15 +23,15 @@ export class DynamicTable extends LitElement {
       }
     };
   }
-
-  constructor() {
-    super();
-    this.tableData = '[]';
+  static properties = {
+    name: 'Hello',
+    title: 'Hello',
+    tableData: 'Json Data'
   }
 
   render() {
-    const tableData = JSON.parse(this.tableData);
-    const headers = Object.keys(tableData[0]);
+    const data = JSON.parse(this.tableData);
+    const headers = Object.keys(data[0]);
 
     return html`
       <table>
@@ -45,7 +42,7 @@ export class DynamicTable extends LitElement {
           </tr>
         </thead>
         <tbody>
-          ${tableData.map(
+          ${data.map(
             row => html`
               <tr>
                 ${headers.map(header => html`<td>${row[header]}</td>`)}
