@@ -12,7 +12,7 @@ export class DynamicTable extends LitElement {
       properties: {
         tableData: {
           type: 'string',
-          title: 'Data',
+          title: 'Table Data',
           description: 'Data in JSON format'
         }
       },
