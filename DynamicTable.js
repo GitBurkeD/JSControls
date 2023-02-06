@@ -16,7 +16,7 @@ export class DynamicTable extends LitElement {
         data: {
           type: 'string',
           title: 'Data',
-          description: 'Data in JSON format',
+          description: 'Data in JSON format'
         }
       },
       standardProperties: {
