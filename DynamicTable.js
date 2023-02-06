@@ -2,23 +2,19 @@ import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit
 
 export class DynamicTable extends LitElement {
   static properties = {
-    data: { type: Array },
+    data: { type: String },
   };
 
   static getMetaConfig() {
     return {
-      controlName: 'DynamicTable',
+      controlName: 'Dynamic Table',
       fallbackDisableSubmit: false,
       version: '1.0',
       properties: {
         data: {
-          type: 'array',
+          type: 'string',
           title: 'Data',
-          description: 'Array of objects to populate the table',
-          items: {
-            type: 'object',
-            properties: {},
-          },
+          description: 'Data in JSON format',
         },
       },
     };
@@ -26,35 +22,33 @@ export class DynamicTable extends LitElement {
 
   constructor() {
     super();
-    this.data = [];
-    this.editing = false;
+    this.data = '[]';
   }
-//Chat GPT did this
+
   render() {
+    const data = JSON.parse(this.data);
+    const headers = Object.keys(data[0]);
+
     return html`
       <table>
         <thead>
           <tr>
-            ${Object.keys(this.data[0] || {}).map(key => html`<th>${key}</th>`)}
-            <th>Edit</th>
+            ${headers.map(header => html`<th>${header}</th>`)}
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          ${this.data.map(row => html`
-            <tr>
-              ${Object.values(row).map(value => html`<td>${value}</td>`)}
-              <td>
-                <input type="checkbox" @change=${this._toggleEditing} />
-              </td>
-            </tr>
-          `)}
+          ${data.map(
+            row => html`
+              <tr>
+                ${headers.map(header => html`<td>${row[header]}</td>`)}
+                <td><input type="checkbox" /></td>
+              </tr>
+            `
+          )}
         </tbody>
       </table>
     `;
-  }
-
-  _toggleEditing(event) {
-    this.editing = event.target.checked;
   }
 }
 
