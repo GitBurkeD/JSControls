@@ -26,11 +26,6 @@ export class DynamicTable extends LitElement {
   static properties = {
     who: {type: String}
   }
-  constructor() {
-    super();
-    this.who = '';
-  }
-
   render() {
     const who = JSON.parse(this.who);
     const headers = Object.keys(who[0]);
