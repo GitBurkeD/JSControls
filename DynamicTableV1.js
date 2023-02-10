@@ -17,9 +17,10 @@ export class DynamicTable extends LitElement {
         }
       },
       standardProperties: {
+        title: true,
         readOnly: true,
         required: false,
-        description: true,
+        description: true
       }
     };
   }
