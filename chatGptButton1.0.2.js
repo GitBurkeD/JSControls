@@ -14,6 +14,11 @@ export class OpenAIChat extends LitElement {
             title: 'Prompt',
             description: 'Text prompt to send to OpenAI'
           },
+        maxTokens: {
+          type: 'string',
+          title: 'Max Tokens',
+          description: 'Max tokens for api Call'
+        },
         apiKey: {
           type: 'string',
           title: 'API Key',
@@ -56,7 +61,7 @@ export class OpenAIChat extends LitElement {
       body: JSON.stringify({
         prompt: this.prompt,
         model: 'text-davinci-003',
-        max_tokens: 100,
+        max_tokens: this.maxTokens,
         temperature: 0.5
       })
     };
