@@ -51,7 +51,7 @@ export class ChatControl extends LitElement {
       },
       body: JSON.stringify({
         prompt: this.prompt,
-        model: text-davinci-003,
+        model: 'text-davinci-003',
         max_tokens: 100,
         temperature: 0.5
       })
