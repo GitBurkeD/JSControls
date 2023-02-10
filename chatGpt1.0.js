@@ -21,7 +21,7 @@ export class ChatControl extends LitElement {
           }
       },
       standardProperties: {
-        title: true,
+        fieldLabel: true,
         readOnly: true,
         required: false,
         description: true
@@ -69,5 +69,5 @@ export class ChatControl extends LitElement {
   }
 }
 
-const elementName = 'chat-control';
+const elementName = 'chat-ai-control';
 customElements.define(elementName, ChatControl);
