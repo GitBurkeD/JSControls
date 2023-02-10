@@ -61,11 +61,7 @@ export class ChatControl extends LitElement {
   }
 
   render() {
-    return html`
-      <div>
-        <p>${this.response}</p>
-      </div>
-    `;
+    return html`<p>${this.response}</p>`;
   }
 }
 
