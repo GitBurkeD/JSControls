@@ -33,7 +33,8 @@ export class OpenAIChat extends LitElement {
     name: 'OpenAI Chat',
     title: 'OpenAI Chat',
     apiKey: '',
-    response: ''
+    response: '',
+    loading: false
   };
 
   constructor() {
@@ -41,9 +42,11 @@ export class OpenAIChat extends LitElement {
     this.apiKey = '';
     this.response = '';
     this.input = '';
+    this.loading = false;
   }
 
   async handleSubmit() {
+    this.loading=true;
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -63,14 +66,18 @@ export class OpenAIChat extends LitElement {
         if (!response.ok) {
           throw new Error(await response.text());
         }
+        this.loading = false;
         return response.json();
+        
       })
       .then(data => {
         this.response = data.choices[0].text;
+        this.loading = false;
         this.requestUpdate()
       })
       .catch(error => {
         console.error('Error getting response from OpenAI API', error);
+        this.loading = false;
         this.response = error.message;
       });
   }
@@ -79,7 +86,7 @@ export class OpenAIChat extends LitElement {
     return html`
       <div>
         <button @click=${this.handleSubmit}>Submit</button>
-        <div>Response: ${this.response}</div>
+        <div>${this.loading ? html`<p>Loading...</p>` : html`<p>${this.response}</p>`}</div>
       </div>
     `;
   }
