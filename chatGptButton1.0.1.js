@@ -32,7 +32,8 @@ export class OpenAIChat extends LitElement {
   static properties = {
     name: 'OpenAI Chat',
     title: 'OpenAI Chat',
-    apiKey: ''
+    apiKey: '',
+    response: ''
   };
 
   constructor() {
@@ -42,7 +43,7 @@ export class OpenAIChat extends LitElement {
     this.input = '';
   }
 
-  handleSubmit() {
+  async handleSubmit() {
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -57,7 +58,7 @@ export class OpenAIChat extends LitElement {
       })
     };
 
-    fetch('https://api.openai.com/v1/completions', requestOptions)
+    const response = await fetch('https://api.openai.com/v1/completions', requestOptions)
       .then(async response => {
         if (!response.ok) {
           throw new Error(await response.text());
@@ -66,6 +67,7 @@ export class OpenAIChat extends LitElement {
       })
       .then(data => {
         this.response = data.choices[0].text;
+        this.requestUpdate()
       })
       .catch(error => {
         console.error('Error getting response from OpenAI API', error);
