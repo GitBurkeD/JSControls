@@ -42,7 +42,7 @@ export class ChatControl extends LitElement {
   }
 
   async getResponse() {
-    const response = await fetch('https://api.openai.com/v1/engines/davinci/jobs', {
+    const response = await fetch('https://api.openai.com/v1/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,6 +50,7 @@ export class ChatControl extends LitElement {
       },
       body: JSON.stringify({
         prompt: this.prompt,
+        model: text-davinci-003,
         max_tokens: 100,
         temperature: 0.5
       })
