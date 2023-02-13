@@ -1,5 +1,5 @@
 import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
-import flatpickr from 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.js';
+import flatpickr from 'https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js';
 
 export class TimeInputControl extends LitElement {
   static getMetaConfig() {
