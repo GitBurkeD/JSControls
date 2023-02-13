@@ -1,4 +1,35 @@
 import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit-all.min.js';
+import flatpickr from 'https://cdn.jsdelivr.net/npm/flatpickr';
+
+export class TimePicker extends LitElement {
+  static get properties() {
+    return {
+      time: { type: String },
+    };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.flatpickr = flatpickr(this.shadowRoot.querySelector('input'), {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: 'H:i',
+    });
+  }
+
+  disconnectedCallback() {
+    this.flatpickr.destroy();
+    super.disconnectedCallback();
+  }
+
+  render() {
+    return html`
+      <input type="text" .value=${this.time} />
+    `;
+  }
+}
+
+customElements.define('time-picker', TimePicker);
 
 export class TimeInputControl extends LitElement {
   static getMetaConfig() {
@@ -48,15 +79,6 @@ export class TimeInputControl extends LitElement {
     const event = new CustomEvent('ntx-value-change', args);
     this.dispatchEvent(event);
     }
-    handleClick() {
-      this.showClock = !this.showClock;
-    }
-  
-    _onTimeSelected(event) {
-      this.value = event.target.value;
-      this.showClock = false;
-    }
-  
     render() {
       return html`
         <div class="time-picker">
@@ -64,7 +86,8 @@ export class TimeInputControl extends LitElement {
           ${this.showClock
             ? html`
               <div class="clock-picker">
-                <input
+              <time-picker></time-picker>
+                 <input
                   type="time"
                   value="${this.value}"
                   @change="${this._onTimeSelected}"
