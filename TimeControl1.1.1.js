@@ -55,7 +55,7 @@ export class TimeInputControl extends LitElement {
       bubbles: true,
       cancelable: false,
       composed: true,
-      detail: value.target.value
+      detail: value
     };
     const event = new CustomEvent('ntx-value-change', args);
     this.dispatchEvent(event);
@@ -68,5 +68,5 @@ export class TimeInputControl extends LitElement {
   }
 }
 
-const elementName = 'time-input-control';
+const elementName = 'time-control';
 customElements.define(elementName, TimeInputControl);
