@@ -39,34 +39,34 @@ export class TimeInputControl extends LitElement {
     this._flatpickr = null;
   }
 
-  firstUpdated() {
+  connectedCallback() {
+    super.connectedCallback();
     this._flatpickr = flatpickr(this.shadowRoot.querySelector('input'), {
       enableTime: true,
       noCalendar: true,
-      dateFormat: 'H:i',
-      onChange: (selectedDates, dateStr) => {
-        this._onTimeSelected(dateStr);
+      dateFormat: "H:i",
+      onChange: (selectedDates, dateStr, instance) => {
+        this.value = dateStr;
+        const args = {
+            bubbles: true,
+            cancelable: false,
+            composed: true,
+            detail: dateStr,
+        };
+        const event = new CustomEvent('ntx-value-change', args);
+        this.dispatchEvent(event);
       }
     });
   }
 
-  _onTimeSelected(value) {
-    const args = {
-      bubbles: true,
-      cancelable: false,
-      composed: true,
-      detail: value
-    };
-    const event = new CustomEvent('ntx-value-change', args);
-    this.dispatchEvent(event);
-  }
-
   render() {
     return html`
-      <input type="text" value="${this.value}" />
+      <div class="time-picker">
+        <input type="text" value="${this.value}" />
+      </div>
     `;
   }
 }
 
-const elementName = 'time-control';
+const elementName = 'time-input-control';
 customElements.define(elementName, TimeInputControl);
