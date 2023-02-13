@@ -6,7 +6,7 @@ export class TimeInputControl extends LitElement {
       controlName: 'Time Input Control',
       fallbackDisableSubmit: false,
       version: '1.0',
-      iconUrl: 'one-line-text',
+      iconUrl: 'date-picker',
       groupName: 'inputs',
       properties: {
         value: {
@@ -22,27 +22,20 @@ export class TimeInputControl extends LitElement {
         readOnly: true,
         required: true,
         description: true,
+        toolTip: true,
+        visibility: true,
+        placeholder: true
       }
     };
   }
 
   static properties = {
-    value: ''
-  };
+    value: '00:00:00'
+  }
 
   constructor() {
     super();
-    this.value = "12:00";
-    this.isOpen = false;
-  }
-
-  toggleClock() {
-    this.isOpen = !this.isOpen;
-  }
-
-  selectTime(event) {
-    this.value = event.target.textContent;
-    this.isOpen = false;
+    this.showClock = false;
   }
   onChange(e) {
     const args = {
@@ -55,57 +48,35 @@ export class TimeInputControl extends LitElement {
     const event = new CustomEvent('ntx-value-change', args);
     this.dispatchEvent(event);
     }
-  render() {
-    return html`
-      <style>
-        .time-input {
-          position: relative;
-        }
-
-        .time-input__clock {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          display: flex;
-          flex-wrap: wrap;
-          background-color: #fff;
-          border: 1px solid #ccc;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-          padding: 10px;
-          z-index: 1;
-          display: ${this.isOpen ? "block" : "none"};
-        }
-
-        .time-input__clock button {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          border: none;
-          background-color: #fff;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-          margin: 10px;
-          font-size: 16px;
-        }
-      </style>
-      <div class="time-input">
-        <input
-          type="text"
-          value=${this.value}
-          @click=${this.toggleClock}
-        />
-        <div class="time-input__clock">
-          ${Array.from({ length: 24 }, (_, i) => {
-            return html`
-              <button @click=${this.selectTime}>
-                ${("0" + i).slice(-2)}:00
-              </button>
-            `;
-          })}
+    handleClick() {
+      this.showClock = !this.showClock;
+    }
+  
+    _onTimeSelected(event) {
+      this.value = event.target.value;
+      this.showClock = false;
+    }
+  
+    render() {
+      return html`
+        <div class="time-picker">
+          <input type="text" value="${this.value}" @click="${this.handleClick}" />
+          ${this.showClock
+            ? html`
+              <div class="clock-picker">
+                <input
+                  type="time"
+                  value="${this.value}"
+                  @change="${this._onTimeSelected}"
+                />
+              </div>
+            `
+            : ''
+          }
         </div>
-      </div>
-    `;
+      `;
+    }
   }
-}
 
 const elementName = 'time-input-control';
 customElements.define(elementName, TimeInputControl);
