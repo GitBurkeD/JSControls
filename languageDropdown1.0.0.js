@@ -8,7 +8,7 @@ export class LanguageControl extends LitElement {
 
   static getMetaConfig() {
     return {
-      controlName: 'Set Form Language',
+      controlName: 'Form Language Dropdown',
       fallbackDisableSubmit: false,
       version: '1.0',
       properties: {
@@ -64,5 +64,5 @@ export class LanguageControl extends LitElement {
   }
 }
 
-const elementName = 'language-control';
-customElements.define('language-control', LanguageControl);
+const elementName = 'language-dropdown';
+customElements.define('language-dropdown', LanguageControl);
