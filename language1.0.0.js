@@ -46,6 +46,7 @@ export class LanguageControl extends LitElement {
   handleChange(event) {
     this.language = event.target.value;
     document.documentElement.lang = this.language;
+    console.log = this.language
   }
 }
 
