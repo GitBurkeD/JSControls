@@ -2,7 +2,6 @@ import { html, LitElement } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/all/lit
 
 export class LanguageControl extends LitElement {
   static properties = {
-      languages: { type: Array },
       selectedLanguage: { type: String },
   };
 
@@ -39,17 +38,16 @@ export class LanguageControl extends LitElement {
   render() {
     return html`
       <label for="language-input">Language:</label>
-      <input type="text" id="language-input" value="${this.language}" @input="${this.handleChange}">
+      <input type="text" id="language-input" value="${this.language}" @change="${this.handleChange}">
     `;
   }
 
   handleChange(event) {
     this.language = event.target.value;
     document.documentElement.lang = this.language;
-    console.log = this.language
+    console.log(this.language);
   }
 }
-
 
 const elementName = 'language-control';
 customElements.define('language-control', LanguageControl);
