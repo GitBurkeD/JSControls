@@ -52,15 +52,14 @@ export class LanguageControl extends LitElement {
     this.language = event.target.value;
     document.documentElement.lang = this.language;
     console.log(this.language);
-    const args = {
-        bubbles: true,
-        cancelable: false,
-        composed: true,
-        // value coming from input change event. 
-        detail: event.target.value,
-    };
-    const event = new CustomEvent('ntx-value-change', args);
-    this.dispatchEvent(event);
+    const valueChangeEvent = new CustomEvent('ntx-value-change', {
+      bubbles: true,
+      cancelable: false,
+      composed: true,
+      // value coming from input change event. 
+      detail: event.target.value,
+    });
+    this.dispatchEvent(valueChangeEvent);
   }
 }
 
